@@ -85,8 +85,12 @@ def train_models(model, X, y, ts):
         st.sidebar.text(s)
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = ts, random_state = 20)
         model.fit(X_train, y_train)
+        st.markdown("# Training Result:")
+        st.write("Model: "+names[mode-1] )
+        score = model.score(X_train, y_train)
+        st.write("Tain Accuracy: " + str((int(score*10000)/100.0))+"%")
         score = model.score(X_test, y_test)
-        st.write(names[mode-1] +": " + str(score))
+        st.write("Test Accuracy: " + str((int(score*10000)/100.0))+"%")
         # save the model to disk
         filename = 'finalized_model.sav'
         pickle.dump(model, open(filename, 'wb'))
