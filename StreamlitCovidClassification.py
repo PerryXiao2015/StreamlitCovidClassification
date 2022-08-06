@@ -13,6 +13,9 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.metrics import classification_report, confusion_matrix
+import numpy as np
+
 import pickle
 import pandas as pd
 from pandas import Series
@@ -87,6 +90,13 @@ def train_models(model, X, y, ts):
         model.fit(X_train, y_train)
         st.markdown("# Training Result:")
         st.write("Model: "+names[mode-1] )
+
+        cm = np.array(confusion_matrix(y_test, y_predict, labels=[2,1,0]))
+        confusion = pd.DataFrame(cm, index=['is_corona', 'other','is_healthy'],
+                         columns=['predicted_corona','other','predicted_healthy'])
+        st.write(confusion)
+        st.write(classification_report(y_test, y_predict))
+        st.write("")
         score = model.score(X_train, y_train)
         st.write("Tain Accuracy: " + str((int(score*10000)/100.0))+"%")
         score = model.score(X_test, y_test)
