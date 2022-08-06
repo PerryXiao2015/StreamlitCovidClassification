@@ -88,12 +88,15 @@ def train_models(model, X, y, ts):
         st.sidebar.text(s)
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = ts, random_state = 20)
         model.fit(X_train, y_train)
+
+        #Prediction
+        y_predict = clf.predict(X_test)
         st.markdown("# Training Result:")
         st.write("Model: "+names[mode-1] )
 
         cm = np.array(confusion_matrix(y_test, y_predict, labels=[2,1,0]))
         confusion = pd.DataFrame(cm, index=['is_corona', 'other','is_healthy'],
-                         columns=['predicted_corona','other','predicted_healthy'])
+                         columns=['predicted_corona','predicted_other','predicted_healthy'])
         st.write(confusion)
         st.write(classification_report(y_test, y_predict))
         st.write("")
