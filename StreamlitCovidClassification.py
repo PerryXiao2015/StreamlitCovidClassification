@@ -45,7 +45,7 @@ def select_models():
          'Select a Machine Learning Model:',
          ["SVM",  "Naive Bayes", "LDA",
         "QDA", "Decision Tree", "Random Forest",
-           "K Nearest Neighbors", "Neural Networks"], index=0)
+           "K Nearest Neighbors", "Neural Networks"], index=5)
     st.sidebar.write('You selected:', option)
     if option == names[0]:
         model = classifiers[0]
@@ -90,7 +90,7 @@ def train_models(model, X, y, ts):
         model.fit(X_train, y_train)
 
         #Prediction
-        y_predict = clf.predict(X_test)
+        y_predict = model.predict(X_test)
         st.markdown("# Training Result:")
         st.write("Model: "+names[mode-1] )
 
