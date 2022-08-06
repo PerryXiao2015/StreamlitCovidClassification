@@ -1,0 +1,9 @@
+streamlit==0.77.0
+scikit-learn==0.23.2
+scikit-image==0.17.2
+scikit-optimize==0.8.1
+scipy==1.4.1
+pickleshare==0.7.5
+cloudpickle==1.6.0
+streamlit-chat==0.0.1
+streamlit-webrtc==0.28.1
